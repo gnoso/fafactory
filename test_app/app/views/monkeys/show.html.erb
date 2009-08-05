@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @monkey.name %>
+</p>
+
+<p>
+  <b>Age:</b>
+  <%=h @monkey.age %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%=h @monkey.gender %>
+</p>
+
+
+<%= link_to 'Edit', edit_monkey_path(@monkey) %> |
+<%= link_to 'Back', monkeys_path %>
