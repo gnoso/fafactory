@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
     Framework for creating objects in remote services.
   DESC
   
-  s.files = %w(lib/fafactory.rb app/controllers app/controllers/fafactories_controller.rb app/models app/views bin/fafactory config/routes.rb)
+  s.files = %w(lib/fafactory.rb app/controllers/fafactories_controller.rb bin/fafactory config/routes.rb)
   s.require_path = 'lib'
   s.has_rdoc = true
   
@@ -22,4 +22,6 @@ Gem::Specification.new do |s|
   s.author = "Gnoso, Inc."
   s.email = "alan@gnoso.com"
   s.homepage = "http://www.gnoso.com"
+  
+  s.add_dependency('activeresource', '>= 2.0')
 end
