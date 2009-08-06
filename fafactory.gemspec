@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
     Framework for creating objects in remote services.
   DESC
   
-  s.files = Dir.glob("{lib,app,bin}/**/*") | ["config/routes.rb"]
+  s.files = %w(lib/fafactory.rb app/controllers app/controllers/fafactories_controller.rb app/models app/views bin/fafactory config/routes.rb)
   s.require_path = 'lib'
   s.has_rdoc = true
   
