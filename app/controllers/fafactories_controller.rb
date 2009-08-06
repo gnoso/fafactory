@@ -1,9 +1,3 @@
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-
-require 'tasks/rails'
-
 class FafactoriesController < ApplicationController
   
   # POST a new instance of the type of model requested
@@ -29,7 +23,24 @@ class FafactoriesController < ApplicationController
   
   # Purges the test database
   def purge
-    Rake::Task['db:test:load'].invoke
+    
+    # We have to disconnect the connection for active record because the
+    # connection doesn't make it through the fork, and the rake task will
+    # do it's own database load, etc anyway
+    dbconfig = ActiveRecord::Base.remove_connection
+    pid = fork do
+      
+      require 'rake'
+      require 'rake/testtask'
+      require 'rake/rdoctask'
+
+      require 'tasks/rails'
+      
+      
+      Rake::Task['db:test:load'].invoke
+    end
+    ActiveRecord::Base.establish_connection(dbconfig)
+    Process.wait(pid)
     
     respond_to do |format|
       format.xml { head :ok }
