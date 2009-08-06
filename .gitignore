@@ -2,3 +2,4 @@ test_app/log/*
 .DS_Store
 test_app/tmp/*
 test_app/db/*.sqlite3
+*.gem
