@@ -12,6 +12,8 @@ config.each do |service, settings|
   if settings["port"]
     exec_args << "--port=#{settings["port"]}"
   end
+  exec_args << "--environment=test"
+  
   log "Starting application at #{settings["path"]}..."
   fork { exec "#{settings["path"]}/script/server", *exec_args }
 end
