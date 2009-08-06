@@ -11,9 +11,11 @@ class Fafactory < ActiveResource::Base
     return Hash.from_xml(result.body)
   end
   
-  def self.purge(service)
-    Fafactory.configure_site(service)
-    Fafactory.delete(:purge)
+  def self.purge(*services)
+    services.each do |service|
+      Fafactory.configure_site(service)
+      Fafactory.delete(:purge)
+    end
     
     nil
   end
