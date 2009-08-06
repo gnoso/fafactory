@@ -10,4 +10,10 @@ class Fafactory < ActiveResource::Base
     
     return Hash.from_xml(result.body)
   end
+  
+  def self.purge
+    Fafactory.delete(:purge)
+    
+    nil
+  end
 end

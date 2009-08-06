@@ -1,3 +1,9 @@
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
+
+require 'tasks/rails'
+
 class FafactoriesController < ApplicationController
   
   # POST a new instance of the type of model requested
@@ -18,6 +24,15 @@ class FafactoriesController < ApplicationController
       format.xml do
         render :xml => obj, :status => :created, :location => obj
       end
+    end
+  end
+  
+  # Purges the test database
+  def purge
+    Rake::Task['db:test:load'].invoke
+    
+    respond_to do |format|
+      format.xml { head :ok }
     end
   end
 end
