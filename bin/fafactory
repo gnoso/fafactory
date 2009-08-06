@@ -1,0 +1,33 @@
+# Starts the rails apps configured in config/fafactory.yml in test mode on
+# the given ports
+
+def log(msg)
+  puts "* [Fafactory] #{msg}"
+end
+
+config = YAML.load_file('config/fafactory.yml')
+
+config.each do |service, settings|
+  exec_args = []
+  if settings["port"]
+    exec_args << "--port=#{settings["port"]}"
+  end
+  log "Starting application at #{settings["path"]}..."
+  fork { exec "#{settings["path"]}/script/server", *exec_args }
+end
+
+Signal.trap("TERM") do
+  log "Terminating..."
+  exit
+end
+Signal.trap("INT") do
+  log "Terminating..."
+  exit
+end
+
+begin
+  Process.waitall
+rescue
+end
+
+log "All apps exited."
