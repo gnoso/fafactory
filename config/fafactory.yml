@@ -1,10 +1,10 @@
-cart:
-  path: ../cart
-  port: 3001
-    
-coin:
-  path: ../coin
-  port: 3002
+#cart:
+#  path: ../cart
+#  port: 3001
+#    
+#coin:
+#  path: ../coin
+#  port: 3002
     
 test_app:
   path: ./test_app

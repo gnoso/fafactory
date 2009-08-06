@@ -1,8 +1,7 @@
 require 'active_resource'
 
 class Fafactory < ActiveResource::Base
-  FAFACTORY_CONFIG = YAML.load('config/fafactory.yml')
-  
+
   # Creates a new instance of a remote model using the data provided.
   def self.create_instance(service, model, data)
     Fafactory.configure_site(service)
@@ -21,6 +20,8 @@ class Fafactory < ActiveResource::Base
   
   private
   def self.configure_site(service)
-    self.site = "http://0.0.0.0:#{FAFACTORY_CONFIG["service"]["port"]}"
+    @@fafactory_config ||= YAML.load_file('config/fafactory.yml')
+    
+    self.site = "http://0.0.0.0:#{@@fafactory_config[service]["port"]}"
   end
 end
