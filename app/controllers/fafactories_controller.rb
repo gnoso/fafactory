@@ -17,7 +17,7 @@ if Rails.env == "test"
       
       respond_to do |format|
         format.xml do
-          render :xml => obj, :status => :created, :location => obj
+          render :xml => obj, :status => :created
         end
       end
     end
