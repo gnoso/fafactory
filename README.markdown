@@ -9,13 +9,13 @@ Fafactory provides a test mode only controller that can easily create test insta
 
 Installing
 ----------
-Make sure you have GitHub in your gem sources before you try to do the install.
+Make sure you have gemcutter in your gem sources before you try to do the install. You can find out how to do that at http://gemcutter.org.
 
-    gem install gnoso-fafactory
+    gem install fafactory
 
 Now that you've got the gem installed, you'll need to configure any service that you want to expose to Fafactory. Add a line like the following to your environment.rb:
 
-    config.gem "gnoso-fafactory", :lib => "fafactory"
+    config.gem "fafactory", :lib => "fafactory"
     
 Now, in the app that will be utilizing the Fafactory enabled service, create a file called config/fafactory.yml and define your service in YAML. You'll need to include the filesystem path to the service and the port, so your config file will have one or more entries like the following:
 

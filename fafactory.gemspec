@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.author = "Gnoso, Inc."
   s.email = "alan@gnoso.com"
-  s.homepage = "http://www.gnoso.com"
+  s.homepage = "http://github.com/gnoso/fafactory"
   
   s.add_dependency('activeresource', '>= 2.0')
 end
