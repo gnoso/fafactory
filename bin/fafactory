@@ -1,5 +1,8 @@
+#!/usr/bin/env ruby
+
 # Starts the rails apps configured in config/fafactory.yml in test mode on
 # the given ports
+require 'fileutils'
 
 def log(msg)
   puts "* [Fafactory] #{msg}"
@@ -16,8 +19,8 @@ config.each do |service, settings|
   
   log "Starting application at #{settings["path"]}..."
   fork do 
-    cd settings["path"]
-    exec "#{settings["path"]}/script/server", *exec_args
+    FileUtils.cd settings["path"]
+    exec "script/server", *exec_args
   end
 end
 
