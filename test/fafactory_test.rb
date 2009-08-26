@@ -27,4 +27,11 @@ class FafactoryTest < Test::Unit::TestCase
     
     assert_equal 0, Monkey.find(:all).size
   end
+  
+  test "that finding works" do
+    monkey = Monkey.create({ :name => "Mongo" })
+    
+    monkey_xml_hash = Fafactory.find('test_app', "Monkey", monkey.id)
+    assert_equal monkey.id, monkey_xml_hash["id"]
+  end
 end

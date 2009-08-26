@@ -20,6 +20,12 @@ class Fafactory < ActiveResource::Base
     nil
   end
   
+  # Loads an instance of a remote model based on the id given
+  def self.find(service, model, id)
+    Fafactory.configure_site(service)
+    Fafactory.get(:find, { :model => model, :id => id })
+  end
+  
   private
   def self.configure_site(service)
     @@fafactory_config ||= YAML.load_file('config/fafactory.yml')

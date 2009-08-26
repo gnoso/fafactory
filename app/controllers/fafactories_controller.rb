@@ -47,5 +47,22 @@ if Rails.env == "test"
         format.xml { head :ok }
       end
     end
+    
+    # Find the instance of model identified by id and return it's xml.
+    #
+    # ==== Parameters
+    # id<Integer>:: The id of the instance to look up.
+    # model<String>:: The model to look up the instance for.
+    #  
+    # ==== Returns
+    # 
+    def find
+      obj = Module.const_get(params[:model].to_sym).find(params[:id])
+      respond_to do |format|
+        format.xml do
+          render :xml => obj
+        end
+      end
+    end
   end
 end
