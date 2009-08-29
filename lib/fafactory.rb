@@ -72,9 +72,9 @@ class Fafactory < ActiveResource::Base
   
   private
   def self.configure_site(service)
-    @@fafactory_config ||= YAML.load_file('config/fafactory.yml')
+    @fafactory_config ||= YAML.load_file('config/fafactory.yml')
     
-    self.site = "http://0.0.0.0:#{@@fafactory_config[service]["port"]}"
+    self.site = "http://0.0.0.0:#{@fafactory_config[service]["port"]}"
   end
   
   def self.camelize_model(model)
