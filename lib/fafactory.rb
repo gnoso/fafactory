@@ -25,7 +25,8 @@ class Fafactory < ActiveResource::Base
   
   # Creates a new remote instance based on the given parameters
   def create(options)
-    Fafactory.create_instance(@service, @model, options.merge(@defaults))
+    Fafactory.create_instance(@service, @model,
+        options.merge(@defaults))[Fafactory.underscore_model(@model)]
   end
   
   # Creates a new instance of a remote model using the data provided.
@@ -61,5 +62,9 @@ class Fafactory < ActiveResource::Base
   
   def self.camelize_model(model)
     model.to_s.camelize
+  end
+  
+  def self.underscore_model(model)
+    model.to_s.underscore
   end
 end
