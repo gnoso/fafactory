@@ -25,19 +25,32 @@ Now, in the app that will be utilizing the Fafactory enabled service, create a f
 
 Testing With Fafactory
 ----------------------
-Assuming you've got a model called Monkey in an app exposing Fafactory, here's
-how you would test it:
+Assuming you've got a model called Monkey in an app exposing Fafactory, you'll want to define some defaults for your factory first.
 
-  Fafactory.purge('test_app')
-  id = Fafactory.create_instance('test_app', 'Monkey', 
-      { 
-        "name" => "Mongo",
-        "age" => 5,
-        "gender" => "male"
-      })["monkey"]["id"]
+    Fafactory.define('test_app', :monkey, { :name => "Mongo", :age => 5, 
+        :gender => "male" })
+
+Then, you can apply changes to your default and create them within your service.
+
+    result = Fafactory.create('test_app', 'Monkey', { "name" => "Alan" })
       
-  monkey = Monkey.find(id)
-  assert_equal "Mongo", monkey.name
+    # now load the object through active resource, maybe do something
+    # interesting
+    monkey = Monkey.find(result["id"])
+    monkey.something_interesting
+    assert_equal "Mongo", monkey.name
+
+Purging The Remote Database
+---------------------------
+At the beginning of each test you'll probably want to purge the databases of the services that you're testing interactions with. You can do that with:
+
+    Fafactory.purge('test_app')
+    
+Finding Records
+---------------
+Sometimes you want to confirm something about a remote object without necessarily calling through ActiveResource, so Fafactory includes a find method that lets you find a particular model in a particular service by its id:
+
+    Fafactory.find('test_app', :monkey, 1)
 
 Reporting Issues
 ----------------
