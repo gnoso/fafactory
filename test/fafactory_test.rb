@@ -34,4 +34,12 @@ class FafactoryTest < Test::Unit::TestCase
     monkey_xml_hash = Fafactory.find('test_app', "Monkey", monkey.id)
     assert_equal monkey.id, monkey_xml_hash["id"]
   end
+  
+  test "that defining a new factory works" do
+    Fafactory.define('test_app', 'Monkey', :name => "Mongo")
+    result = Fafactory.create('test_app', 'Monkey', :age => 12)
+    
+    assert_equal 12, result["monkey"]["age"]
+    assert_equal "Mongo", result["monkey"]["name"]
+  end
 end

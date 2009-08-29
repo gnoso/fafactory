@@ -2,6 +2,32 @@ require 'active_resource'
 
 class Fafactory < ActiveResource::Base
 
+  # Defines a new object definition 
+  def self.define(service, model, defaults)
+    @definitions ||= {}
+  
+    factory = Fafactory.new(service, model, defaults)
+    @definitions[service] ||= {}
+    @definitions[service][model] = factory
+  end
+  
+  # Constructs a new instance based on the given service and model
+  def self.create(service, model, options)
+    @definitions[service][model].create(options)
+  end
+  
+  # Set up a new fafactory with the given defaults
+  def initialize(service, model, defaults)
+    @service = service
+    @model = model
+    @defaults = defaults
+  end
+  
+  # Creates a new remote instance based on the given parameters
+  def create(options)
+    Fafactory.create_instance(@service, @model, options.merge(@defaults))
+  end
+  
   # Creates a new instance of a remote model using the data provided.
   def self.create_instance(service, model, data)
     Fafactory.configure_site(service)
