@@ -42,4 +42,9 @@ class FafactoryTest < Test::Unit::TestCase
     assert_equal 12, result["age"]
     assert_equal "Mongo", result["name"]
   end
+
+  test "that that creating a new instance of an undefined factory works" do
+    Fafactory.clear_definitions
+    assert_equal 12, Fafactory.create('test_app', 'Monkey', :age => 12)["age"]
+  end
 end

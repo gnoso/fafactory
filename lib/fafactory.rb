@@ -5,15 +5,27 @@ class Fafactory < ActiveResource::Base
   # Defines a new object definition 
   def self.define(service, model, defaults)
     @definitions ||= {}
-  
+    
+    model = camelize_model(model)
+    
     factory = Fafactory.new(service, model, defaults)
     @definitions[service] ||= {}
-    @definitions[service][camelize_model(model)] = factory
+    @definitions[service][model] = factory
   end
   
   # Constructs a new instance based on the given service and model
   def self.create(service, model, options)
-    @definitions[service][camelize_model(model)].create(options)
+    model = camelize_model(model)
+    
+    # define a blank definition if we don't already have a definition
+    @definitions ||= {}
+    if @definitions[service] == nil ||
+        @definitions[service][model] == nil
+      
+      define(service, model, {})
+    end
+    
+    @definitions[service][model].create(options)
   end
   
   # Set up a new fafactory with the given defaults
@@ -51,6 +63,11 @@ class Fafactory < ActiveResource::Base
   def self.find(service, model, id)
     Fafactory.configure_site(service)
     Fafactory.get(:find, { :model => camelize_model(model), :id => id })
+  end
+  
+  # Clears definitions (mainly useful for testing)
+  def self.clear_definitions
+    @definitions = {} if defined? @definitions
   end
   
   private
