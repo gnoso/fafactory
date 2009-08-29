@@ -14,7 +14,7 @@ class Fafactory < ActiveResource::Base
   end
   
   # Constructs a new instance based on the given service and model
-  def self.create(service, model, options)
+  def self.create(service, model, options = {})
     model = camelize_model(model)
     
     # define a blank definition if we don't already have a definition
