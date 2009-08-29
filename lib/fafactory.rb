@@ -8,18 +8,18 @@ class Fafactory < ActiveResource::Base
   
     factory = Fafactory.new(service, model, defaults)
     @definitions[service] ||= {}
-    @definitions[service][model] = factory
+    @definitions[service][camelize_model(model)] = factory
   end
   
   # Constructs a new instance based on the given service and model
   def self.create(service, model, options)
-    @definitions[service][model].create(options)
+    @definitions[service][camelize_model(model)].create(options)
   end
   
   # Set up a new fafactory with the given defaults
   def initialize(service, model, defaults)
     @service = service
-    @model = model
+    @model = Fafactory.camelize_model(model)
     @defaults = defaults
   end
   
@@ -32,7 +32,7 @@ class Fafactory < ActiveResource::Base
   def self.create_instance(service, model, data)
     Fafactory.configure_site(service)
     result = Fafactory.post :create_instance, nil, 
-        { :model => model, :data => data }.to_xml
+        { :model => camelize_model(model), :data => data }.to_xml
     
     return Hash.from_xml(result.body)
   end
@@ -49,7 +49,7 @@ class Fafactory < ActiveResource::Base
   # Loads an instance of a remote model based on the id given
   def self.find(service, model, id)
     Fafactory.configure_site(service)
-    Fafactory.get(:find, { :model => model, :id => id })
+    Fafactory.get(:find, { :model => camelize_model(model), :id => id })
   end
   
   private
@@ -57,5 +57,9 @@ class Fafactory < ActiveResource::Base
     @@fafactory_config ||= YAML.load_file('config/fafactory.yml')
     
     self.site = "http://0.0.0.0:#{@@fafactory_config[service]["port"]}"
+  end
+  
+  def self.camelize_model(model)
+    model.to_s.camelize
   end
 end

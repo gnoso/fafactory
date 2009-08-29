@@ -3,7 +3,7 @@ require 'test/test_helper'
 class FafactoryTest < Test::Unit::TestCase
   
   test "that creating a new instance works" do
-    id = Fafactory.create_instance('test_app', 'Monkey', 
+    id = Fafactory.create_instance('test_app', :monkey, 
         { 
           "name" => "Mongo",
           "age" => 5,
@@ -16,7 +16,7 @@ class FafactoryTest < Test::Unit::TestCase
   
   test "that purging works" do
     10.times do
-      Fafactory.create_instance('test_app', 'Monkey', 
+      Fafactory.create_instance('test_app', :monkey, 
         { 
           "name" => "Mongo",
           "age" => 5,
@@ -31,12 +31,12 @@ class FafactoryTest < Test::Unit::TestCase
   test "that finding works" do
     monkey = Monkey.create({ :name => "Mongo" })
     
-    monkey_xml_hash = Fafactory.find('test_app', "Monkey", monkey.id)
+    monkey_xml_hash = Fafactory.find('test_app', :monkey, monkey.id)
     assert_equal monkey.id, monkey_xml_hash["id"]
   end
   
   test "that defining a new factory works" do
-    Fafactory.define('test_app', 'Monkey', :name => "Mongo")
+    Fafactory.define('test_app', :monkey, :name => "Mongo")
     result = Fafactory.create('test_app', 'Monkey', :age => 12)
     
     assert_equal 12, result["monkey"]["age"]
