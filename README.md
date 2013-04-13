@@ -5,7 +5,7 @@ Fafactory (originally Far Away Factory) is a tool for remotely creating instance
 
 How It Works
 ------------
-Fafactory provides a test mode only controller that can easily create test instances of your ActiveRecord models in your services and a framework for creating those instances from within the tests of the applications that consume those services. So, for example, if you were developing an application that exposed a Widgets resource, you could create a widget using Fafactory and then test loading that widget over ActiveResource.
+Fafactory provides a test mode only controller that can easily create test instances of your ActiveRecord models in your services and a framework for creating those instances from within the tests of the applications that consume those services. So, for example, if you were developing an application that exposed a Widget's resource, you could create a widget using Fafactory and then test loading that widget over ActiveResource.
 
 Installing
 ----------
@@ -27,15 +27,13 @@ Testing With Fafactory
 ----------------------
 Assuming you've got a model called Monkey in an app exposing Fafactory, you'll want to define some defaults for your factory first.
 
-    Fafactory.define('test_app', :monkey, { :name => "Mongo", :age => 5, 
-        :gender => "male" })
+    Fafactory.define('test_app', :monkey, { :name => "Mongo", :age => 5, :gender => "male" })
 
 Then, you can apply changes to your default and create them within your service.
 
     result = Fafactory.create('test_app', 'Monkey', { "name" => "Alan" })
       
-    # now load the object through active resource, maybe do something
-    # interesting
+    # now load the object through active resource, and maybe do something interesting
     monkey = Monkey.find(result["id"])
     monkey.something_interesting
     assert_equal "Mongo", monkey.name
