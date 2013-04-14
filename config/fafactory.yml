@@ -1,3 +1,5 @@
+# declare the available ports for use w/ fafactory
+
 #cart:
 #  path: ../cart
 #  port: 3001

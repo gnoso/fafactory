@@ -1,7 +1,6 @@
 require 'test/unit'
 require 'ruby-debug'
 require 'active_resource'
-
 require 'lib/fafactory'
 
 class Test::Unit::TestCase
