@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
-# Starts the rails apps configured in config/fafactory.yml in test mode on
-# the given ports
+# starts the rails app configured in config/fafactory.yml in test mode off of the given ports
 require 'fileutils'
 
 def log(msg)
-  puts "* [Fafactory] #{msg}"
+  puts "* [fafactory] #{msg}"
 end
 
 config = YAML.load_file('config/fafactory.yml')
@@ -38,4 +37,4 @@ begin
 rescue
 end
 
-log "All apps exited."
+log "Exited the/all app(s)!"
