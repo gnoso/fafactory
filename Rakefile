@@ -1,5 +1,4 @@
 require 'rake'
-
 require 'rake/testtask'
 
 Rake::TestTask.new do |t|
@@ -8,7 +7,7 @@ Rake::TestTask.new do |t|
 end
 
 namespace :gem do
-  desc "Outputs the files that should be sources in the gemspec"
+  desc "Outputs gemspec sources as files"
   task :files do
     files = Dir.glob("{lib,app,bin}/**/*") | ["config/routes.rb"]
     puts files.join(" ")
