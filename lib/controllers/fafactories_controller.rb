@@ -28,7 +28,6 @@ if Rails.env == "test"
       # disconnect the connection for active record because as the connection doesn't make it through the fork, rake task will do it's own database load, etc.
       dbconfig = ActiveRecord::Base.remove_connection
       pid = fork do
-      
         require 'rake'
         require 'rake/testtask'
         require 'rake/rdoctask'
