@@ -1,22 +1,25 @@
-PKG_VERSION = "0.0.5"
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'fafactory/version'
 
-Gem::Specification.new do |s|
-  s.name = 'fafactory'
-  s.version = PKG_VERSION
-  s.platform = Gem::Platform::RUBY
-  s.description = "Fafactory (originally Far Away Factory) is a tool for remotely creating instances of ActiveRecord models within a service. This is useful when doing integration tests of services, because it allows you to set up the environment within the remote service from your test, rather than trying to keep an instance of the service in pristine shape."
-  s.summary = "Framework for creating objects in remote services."
-  
-  s.files = %w(lib/fafactory.rb app/controllers/fafactories_controller.rb bin/fafactory config/routes.rb)
-  s.require_path = 'lib'
-  s.has_rdoc = true
-  
-  s.bindir = "bin"
-  s.executables << "fafactory"
+Gem::Specification.new do |spec|
+  spec.name          = "fafactory"
+  spec.version       = Fafactory::VERSION
+  spec.authors       = ["Alan Johnson", "Taylor Shuler"]
+  spec.email         = ["alan@gnoso.com"]
+  spec.description   = %q{Fafactory (originally Far Away Factory) is a tool for remotely creating instances of ActiveRecord models within a service. This is useful when doing integration tests of services, because it allows you to set up the environment within the remote service from your test, rather than trying to keep an instance of the service in pristine shape.}
+  spec.summary       = %q{Framework for creating objects in remote services.}
+  spec.homepage      = "http://github.com/gnoso/fafactory"
+  spec.license       = "MIT"
 
-  s.author = "Gnoso, Inc."
-  s.email = "alan@gnoso.com"
-  s.homepage = "http://github.com/gnoso/fafactory"
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
   
-  s.add_dependency('activeresource', '>= 2.0')
+  spec.add_dependency "activeresource", ">= 2.0"
+
+  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rake"
 end

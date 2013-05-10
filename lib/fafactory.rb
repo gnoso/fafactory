@@ -1,4 +1,5 @@
-require 'active_resource'
+require "fafactory/version"
+require "active_resource"
 
 class Fafactory < ActiveResource::Base
   # defines a new object definition 
