@@ -1,5 +1,10 @@
-test_app/log/*
+# Directories
+## null
+
+# Files
+*.gem
 .DS_Store
+.project
+test_app/log/*
 test_app/tmp/*
 test_app/db/*.sqlite3
-*.gem
