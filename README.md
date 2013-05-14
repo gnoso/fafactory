@@ -30,7 +30,7 @@ For development with Fafactory, be sure you have the gem "bundler" installed, an
 
 1) Change into your project directory from an available terminal
 2) Run the command "bundle"
-3) Happy developemnt!
+3) Happy developement!
 Don't forget to contribute through GitHub either!
 
 ## Testing With Fafactory
