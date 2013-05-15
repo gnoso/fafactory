@@ -26,6 +26,13 @@ test_app:
   port: 3003
 ```
 
+For development with Fafactory, be sure you have the gem "bundler" installed, and then
+
+1) Change into your project directory from an available terminal
+2) Run the command "bundle"
+3) Happy developement!
+Don't forget to contribute through GitHub either!
+
 ## Testing With Fafactory
 Assuming you've got a model called Monkey in an app exposing Fafactory, you'll want to define some defaults for your factory first.
 
