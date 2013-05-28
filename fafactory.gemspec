@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Fafactory (originally Far Away Factory) is a tool for remotely creating instances of ActiveRecord models within a service. This is useful when doing integration tests of services, because it allows you to set up the environment within the remote service from your test, rather than trying to keep an instance of the service in pristine shape.}
   spec.summary       = %q{Framework for creating objects in remote services.}
   spec.homepage      = "http://github.com/gnoso/fafactory"
-  spec.license       = "MIT"
+  spec.license       = "Apache License 2.0"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
