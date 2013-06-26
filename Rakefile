@@ -10,7 +10,7 @@ end
 namespace :gem do
   desc "Outputs gemspec sources as files"
   task :files do
-    files = Dir.glob("{lib,app,bin}/**/*") | ["config/routes.rb"]
+    files = Dir.glob("{lib,app,bin}/**/*") | ["lib/fafactory/config/routes.rb"]
     puts files.join(" ")
   end
 end
